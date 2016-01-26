@@ -40,7 +40,11 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                 <animations/>
                                 <items>
-                                    <barButtonItem systemItem="action" id="1Pm-Gj-cmX"/>
+                                    <barButtonItem systemItem="action" id="1Pm-Gj-cmX">
+                                        <connections>
+                                            <action selector="shareAction:" destination="BYZ-38-t0r" id="Yjk-Qc-0iX"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="NA1-Pw-cuQ"/>
                                     <barButtonItem title="Item" systemItem="cancel" id="xCD-7o-hy9">
                                         <connections>
@@ -91,6 +95,7 @@
                         <outlet property="bottomTextField" destination="GLe-Ti-A5w" id="HCz-6I-FLs"/>
                         <outlet property="cameraButton" destination="jbS-UP-4Sw" id="7oW-lB-Xgh"/>
                         <outlet property="imagePickerView" destination="dzV-b6-3mD" id="F4X-A1-COM"/>
+                        <outlet property="shareButton" destination="1Pm-Gj-cmX" id="zTr-cW-h8d"/>
                         <outlet property="topTextField" destination="nTF-Ju-QOi" id="agi-Z5-dys"/>
                     </connections>
                 </viewController>

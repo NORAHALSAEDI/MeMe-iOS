@@ -14,6 +14,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
+    @IBOutlet weak var shareButton: UIBarButtonItem!
     
     let memeTextAttributes = [
         NSStrokeColorAttributeName : UIColor.blackColor(),
@@ -39,6 +40,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
+        if imagePickerView.image == nil {
+            shareButton.enabled = false
+        } else {
+            shareButton.enabled = true
+        }
         self.subscribeToKeyboardNotifications()
     }
     
@@ -48,7 +54,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
 
     @IBAction func resetViewController(sender: AnyObject) {
-        self.imagePickerView.image = nil
+        imagePickerView.image = nil
+        shareButton.enabled = false
         topTextField.text = "TOP"
         bottomTextField.text = "BOTTOM"
     }
@@ -131,6 +138,51 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let userInfo = notification.userInfo
         let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue // of CGRect
         return keyboardSize.CGRectValue().height
+    }
+    
+    
+    
+    
+    
+    @IBAction func shareAction(sender: AnyObject) {
+        let memedImage = generateMemedImage()
+        let activityController = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
+        activityController.completionWithItemsHandler = { activity, success, items, error in
+            if success {
+                self.dismissViewControllerAnimated(true, completion: nil)
+            }
+            if activity == UIActivityTypeMail {
+                print("mail")
+            }        }
+        self.presentViewController(activityController, animated: true, completion: saveMeme)
+    }
+    
+    
+    func saveMeme() {
+        //Create the meme
+        let memedImage = generateMemedImage()
+        
+        let meme = Meme(topText: self.topTextField.text!, bottomText: self.bottomTextField.text!,
+            image: self.imagePickerView.image!, memedImage: memedImage)
+        
+        // Add it to the memes array in the Application Delegate
+        (UIApplication.sharedApplication().delegate as!
+            AppDelegate).memes.append(meme)
+    }
+    
+    
+    // Create a UIImage that combines the Image View and the Textfields
+    func generateMemedImage() -> UIImage {
+        // TODO: Hide toolbar and navbar
+        
+        // render view to an image
+        UIGraphicsBeginImageContext(self.view.frame.size)
+        self.view.drawViewHierarchyInRect(self.view.frame, afterScreenUpdates: true)
+        let memedImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        // TODO:  Show toolbar and navbar
+        return memedImage
     }
 
 }
