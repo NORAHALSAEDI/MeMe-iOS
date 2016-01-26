@@ -15,11 +15,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
     @IBOutlet weak var shareButton: UIBarButtonItem!
+    @IBOutlet weak var navBar: UIToolbar!
+    @IBOutlet weak var toolBar: UIToolbar!
     
     let memeTextAttributes = [
         NSStrokeColorAttributeName : UIColor.blackColor(),
         NSForegroundColorAttributeName : UIColor.whiteColor(),
-        NSFontAttributeName : UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
+        NSFontAttributeName : UIFont(name: "HelveticaNeue-CondensedBlack", size: 32)!,
         NSStrokeWidthAttributeName : -3.0
     ]
     
@@ -72,6 +74,56 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         imagePickerController.delegate = self
         imagePickerController.sourceType = UIImagePickerControllerSourceType.Camera
         self.presentViewController(imagePickerController, animated: true, completion: nil)
+    }
+    
+    @IBAction func shareAction(sender: AnyObject) {
+        let memedImage = generateMemedImage()
+        let activityController = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
+        activityController.completionWithItemsHandler = { activity, success, items, error in
+            if success {
+                //self.dismissViewControllerAnimated(true, completion: nil)
+            }
+        }
+        self.presentViewController(activityController, animated: true, completion: saveMeme)
+    }
+    
+    
+    func saveMeme() {
+        //Create the meme
+        let memedImage = generateMemedImage()
+        
+        let meme = Meme(topText: self.topTextField.text!, bottomText: self.bottomTextField.text!,
+            image: self.imagePickerView.image!, memedImage: memedImage)
+        
+        // Add it to the memes array in the Application Delegate
+        (UIApplication.sharedApplication().delegate as!
+            AppDelegate).memes.append(meme)
+    }
+    
+    
+    // Create a UIImage that combines the Image View and the Textfields
+    func generateMemedImage() -> UIImage {
+        // TODO: Hide toolbar and navbar
+        navBar.hidden = true
+        toolBar.hidden = true
+        
+        // render view to an image
+        UIGraphicsBeginImageContext(self.view.frame.size)
+        self.view.drawViewHierarchyInRect(self.view.frame, afterScreenUpdates: true)
+        let memedImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        // TODO:  Show toolbar and navbar
+        navBar.hidden = false
+        toolBar.hidden = false
+        
+        return memedImage
+    }
+    
+    
+    // Remove status bar from the view
+    override func prefersStatusBarHidden() -> Bool {
+        return true
     }
     
     
@@ -138,51 +190,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let userInfo = notification.userInfo
         let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue // of CGRect
         return keyboardSize.CGRectValue().height
-    }
-    
-    
-    
-    
-    
-    @IBAction func shareAction(sender: AnyObject) {
-        let memedImage = generateMemedImage()
-        let activityController = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
-        activityController.completionWithItemsHandler = { activity, success, items, error in
-            if success {
-                self.dismissViewControllerAnimated(true, completion: nil)
-            }
-            if activity == UIActivityTypeMail {
-                print("mail")
-            }        }
-        self.presentViewController(activityController, animated: true, completion: saveMeme)
-    }
-    
-    
-    func saveMeme() {
-        //Create the meme
-        let memedImage = generateMemedImage()
-        
-        let meme = Meme(topText: self.topTextField.text!, bottomText: self.bottomTextField.text!,
-            image: self.imagePickerView.image!, memedImage: memedImage)
-        
-        // Add it to the memes array in the Application Delegate
-        (UIApplication.sharedApplication().delegate as!
-            AppDelegate).memes.append(meme)
-    }
-    
-    
-    // Create a UIImage that combines the Image View and the Textfields
-    func generateMemedImage() -> UIImage {
-        // TODO: Hide toolbar and navbar
-        
-        // render view to an image
-        UIGraphicsBeginImageContext(self.view.frame.size)
-        self.view.drawViewHierarchyInRect(self.view.frame, afterScreenUpdates: true)
-        let memedImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        // TODO:  Show toolbar and navbar
-        return memedImage
     }
 
 }

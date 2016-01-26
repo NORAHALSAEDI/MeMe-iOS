@@ -57,14 +57,14 @@
                                 <rect key="frame" x="0.0" y="44" width="600" height="512"/>
                                 <animations/>
                             </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Top" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nTF-Ju-QOi">
-                                <rect key="frame" x="20" y="84" width="560" height="17"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Top" textAlignment="natural" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="nTF-Ju-QOi">
+                                <rect key="frame" x="20" y="64" width="560" height="17"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Bottom" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GLe-Ti-A5w">
-                                <rect key="frame" x="20" y="499" width="560" height="17"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Bottom" textAlignment="natural" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="GLe-Ti-A5w">
+                                <rect key="frame" x="20" y="519" width="560" height="17"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
@@ -78,12 +78,12 @@
                             <constraint firstItem="Rdp-8o-rVO" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="Gfa-s0-72x"/>
                             <constraint firstItem="GLe-Ti-A5w" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="JHD-LT-tRt"/>
                             <constraint firstItem="dzV-b6-3mD" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="MS3-cc-Kq6"/>
-                            <constraint firstItem="FgA-Wv-R6x" firstAttribute="top" secondItem="GLe-Ti-A5w" secondAttribute="bottom" constant="40" id="MaV-fy-dxj"/>
+                            <constraint firstItem="FgA-Wv-R6x" firstAttribute="top" secondItem="GLe-Ti-A5w" secondAttribute="bottom" constant="20" id="MaV-fy-dxj"/>
                             <constraint firstItem="dzV-b6-3mD" firstAttribute="top" secondItem="Rdp-8o-rVO" secondAttribute="bottom" id="S7P-eB-awT"/>
                             <constraint firstItem="nTF-Ju-QOi" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="YN3-Ro-GaD"/>
                             <constraint firstItem="nTF-Ju-QOi" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="fWX-bX-ctI"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="FgA-Wv-R6x" secondAttribute="bottom" id="nVR-Zq-4kx"/>
-                            <constraint firstItem="nTF-Ju-QOi" firstAttribute="top" secondItem="Rdp-8o-rVO" secondAttribute="bottom" constant="40" id="pZw-2E-GdJ"/>
+                            <constraint firstItem="nTF-Ju-QOi" firstAttribute="top" secondItem="Rdp-8o-rVO" secondAttribute="bottom" constant="20" id="pZw-2E-GdJ"/>
                             <constraint firstItem="FgA-Wv-R6x" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="sPZ-v8-gT0"/>
                             <constraint firstItem="GLe-Ti-A5w" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="uyv-ss-Ar6"/>
                             <constraint firstItem="FgA-Wv-R6x" firstAttribute="top" secondItem="dzV-b6-3mD" secondAttribute="bottom" id="vOt-64-adz"/>
@@ -95,7 +95,9 @@
                         <outlet property="bottomTextField" destination="GLe-Ti-A5w" id="HCz-6I-FLs"/>
                         <outlet property="cameraButton" destination="jbS-UP-4Sw" id="7oW-lB-Xgh"/>
                         <outlet property="imagePickerView" destination="dzV-b6-3mD" id="F4X-A1-COM"/>
+                        <outlet property="navBar" destination="Rdp-8o-rVO" id="fbz-hl-kjf"/>
                         <outlet property="shareButton" destination="1Pm-Gj-cmX" id="zTr-cW-h8d"/>
+                        <outlet property="toolBar" destination="FgA-Wv-R6x" id="TTK-41-n63"/>
                         <outlet property="topTextField" destination="nTF-Ju-QOi" id="agi-Z5-dys"/>
                     </connections>
                 </viewController>
