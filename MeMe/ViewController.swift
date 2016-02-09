@@ -41,20 +41,27 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        // Check if camera is available
         cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
         if imagePickerView.image == nil {
             shareButton.enabled = false
         } else {
             shareButton.enabled = true
         }
+        
+        // Subscribe to keyboard notifications to detect when the keyboard appears
         self.subscribeToKeyboardNotifications()
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
+        
+        // Unsubscribe from keyboard notifications
         self.unsubscribeFromKeyboardNotifications()
     }
 
+    // Reset textfields and image
     @IBAction func resetViewController(sender: AnyObject) {
         imagePickerView.image = nil
         shareButton.enabled = false
@@ -80,11 +87,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let memedImage = generateMemedImage()
         let activityController = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
         activityController.completionWithItemsHandler = { activity, success, items, error in
-            if success {
-                //self.dismissViewControllerAnimated(true, completion: nil)
-            }
+            self.saveMeme()
+            self.dismissViewControllerAnimated(true, completion: nil)
         }
-        self.presentViewController(activityController, animated: true, completion: saveMeme)
+        self.presentViewController(activityController, animated: true, completion: nil)
     }
     
     
@@ -103,17 +109,17 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     // Create a UIImage that combines the Image View and the Textfields
     func generateMemedImage() -> UIImage {
-        // TODO: Hide toolbar and navbar
+        // Hide toolbar and navbar
         navBar.hidden = true
         toolBar.hidden = true
         
-        // render view to an image
+        // Render view to an image
         UIGraphicsBeginImageContext(self.view.frame.size)
         self.view.drawViewHierarchyInRect(self.view.frame, afterScreenUpdates: true)
         let memedImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        // TODO:  Show toolbar and navbar
+        // Show toolbar and navbar
         navBar.hidden = false
         toolBar.hidden = false
         
