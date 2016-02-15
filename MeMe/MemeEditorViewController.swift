@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
+class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
 
     @IBOutlet weak var imagePickerView: UIImageView!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
@@ -51,14 +51,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
         
         // Subscribe to keyboard notifications to detect when the keyboard appears
-        self.subscribeToKeyboardNotifications()
+        subscribeToKeyboardNotifications()
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         
         // Unsubscribe from keyboard notifications
-        self.unsubscribeFromKeyboardNotifications()
+        unsubscribeFromKeyboardNotifications()
     }
 
     // Reset textfields and image
@@ -70,17 +70,17 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     @IBAction func pickAnImageFromAlbum(sender: AnyObject) {
-        let imagePickerController = UIImagePickerController()
-        imagePickerController.delegate = self
-        imagePickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-        self.presentViewController(imagePickerController, animated: true, completion: nil)
-    }
+        pickAnImage(UIImagePickerControllerSourceType.PhotoLibrary)    }
     
     @IBAction func pickAnImageFromCamera(sender: AnyObject) {
+        pickAnImage(UIImagePickerControllerSourceType.Camera)
+    }
+    
+    func pickAnImage(sourceType: UIImagePickerControllerSourceType){
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
-        imagePickerController.sourceType = UIImagePickerControllerSourceType.Camera
-        self.presentViewController(imagePickerController, animated: true, completion: nil)
+        imagePickerController.sourceType = sourceType
+        presentViewController(imagePickerController, animated: true, completion: nil)
     }
     
     @IBAction func shareAction(sender: AnyObject) {
@@ -90,7 +90,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             self.saveMeme()
             self.dismissViewControllerAnimated(true, completion: nil)
         }
-        self.presentViewController(activityController, animated: true, completion: nil)
+        presentViewController(activityController, animated: true, completion: nil)
     }
     
     
@@ -98,8 +98,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         //Create the meme
         let memedImage = generateMemedImage()
         
-        let meme = Meme(topText: self.topTextField.text!, bottomText: self.bottomTextField.text!,
-            image: self.imagePickerView.image!, memedImage: memedImage)
+        let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!,
+            image: imagePickerView.image!, memedImage: memedImage)
         
         // Add it to the memes array in the Application Delegate
         (UIApplication.sharedApplication().delegate as!
@@ -114,8 +114,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         toolBar.hidden = true
         
         // Render view to an image
-        UIGraphicsBeginImageContext(self.view.frame.size)
-        self.view.drawViewHierarchyInRect(self.view.frame, afterScreenUpdates: true)
+        UIGraphicsBeginImageContext(view.frame.size)
+        view.drawViewHierarchyInRect(view.frame, afterScreenUpdates: true)
         let memedImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
@@ -137,13 +137,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            self.imagePickerView.image = image
-            self.dismissViewControllerAnimated(true, completion: nil)
+            imagePickerView.image = image
+            dismissViewControllerAnimated(true, completion: nil)
         }
     }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
     
@@ -182,13 +182,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
     func keyboardWillShow(notification: NSNotification) {
         if bottomTextField.isFirstResponder() {
-            self.view.frame.origin.y -= getKeyboardHeight(notification)
+            view.frame.origin.y -= getKeyboardHeight(notification)
         }
     }
     
     func keyboardWillHide(notification: NSNotification) {
         if bottomTextField.isFirstResponder() {
-            self.view.frame.origin.y += getKeyboardHeight(notification)
+            view.frame.origin.y += getKeyboardHeight(notification)
         }
     }
     

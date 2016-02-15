@@ -8,17 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		3B687B031C45541900B9A96C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B687B021C45541900B9A96C /* AppDelegate.swift */; };
-		3B687B051C45541900B9A96C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B687B041C45541900B9A96C /* ViewController.swift */; };
+		3B687B051C45541900B9A96C /* MemeEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B687B041C45541900B9A96C /* MemeEditorViewController.swift */; };
 		3B687B081C45541900B9A96C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B687B061C45541900B9A96C /* Main.storyboard */; };
 		3B687B0A1C45541900B9A96C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B687B091C45541900B9A96C /* Assets.xcassets */; };
 		3B687B0D1C45541900B9A96C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B687B0B1C45541900B9A96C /* LaunchScreen.storyboard */; };
-		3B687B151C57C73600B9A96C /* Meme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B687B141C57C73600B9A96C /* Meme.swift */; settings = {ASSET_TAGS = (); }; };
+		3B687B151C57C73600B9A96C /* Meme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B687B141C57C73600B9A96C /* Meme.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3B687AFF1C45541900B9A96C /* MeMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B687B021C45541900B9A96C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		3B687B041C45541900B9A96C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3B687B041C45541900B9A96C /* MemeEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeEditorViewController.swift; sourceTree = "<group>"; };
 		3B687B071C45541900B9A96C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3B687B091C45541900B9A96C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3B687B0C1C45541900B9A96C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -57,7 +57,7 @@
 			isa = PBXGroup;
 			children = (
 				3B687B021C45541900B9A96C /* AppDelegate.swift */,
-				3B687B041C45541900B9A96C /* ViewController.swift */,
+				3B687B041C45541900B9A96C /* MemeEditorViewController.swift */,
 				3B687B061C45541900B9A96C /* Main.storyboard */,
 				3B687B091C45541900B9A96C /* Assets.xcassets */,
 				3B687B0B1C45541900B9A96C /* LaunchScreen.storyboard */,
@@ -98,7 +98,7 @@
 				TargetAttributes = {
 					3B687AFE1C45541900B9A96C = {
 						CreatedOnToolsVersion = 7.0.1;
-						DevelopmentTeam = 8QCSNUTAME;
+						DevelopmentTeam = 623BS5NHFX;
 					};
 				};
 			};
@@ -139,7 +139,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3B687B151C57C73600B9A96C /* Meme.swift in Sources */,
-				3B687B051C45541900B9A96C /* ViewController.swift in Sources */,
+				3B687B051C45541900B9A96C /* MemeEditorViewController.swift in Sources */,
 				3B687B031C45541900B9A96C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -251,6 +251,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = MeMe/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.davidplaza.MeMe;
@@ -262,6 +263,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = MeMe/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.davidplaza.MeMe;
@@ -288,6 +290,7 @@
 				3B687B131C45541900B9A96C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
